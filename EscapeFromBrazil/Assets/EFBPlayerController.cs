@@ -7,6 +7,7 @@ public class EFBPlayerController : MonoBehaviour
 
     [SerializeField] private GameObject bullet; 
     [SerializeField] private Transform bulletDir;
+    [SerializeField] private Transform trash;
     private EFBActions controls;
 
     private void Awake()
@@ -32,7 +33,7 @@ public class EFBPlayerController : MonoBehaviour
     {
         Vector2 mousePosition = controls.Player.MousePosition.ReadValue<Vector2>();
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-        GameObject g = Instantiate(bullet, bulletDir.position, bulletDir.rotation);
+        GameObject g = Instantiate(bullet, bulletDir.position, bulletDir.rotation, trash);
         g.SetActive(true);
     }
 
