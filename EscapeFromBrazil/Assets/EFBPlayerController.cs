@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine;
 public class EFBPlayerController : MonoBehaviour
 {
 
-    [SerializeField] private GameObject bullet; 
+    [SerializeField] private GameObject bullet;
     [SerializeField] private Transform bulletDir;
     [SerializeField] private Transform trash;
     private EFBActions controls;
@@ -27,6 +28,13 @@ public class EFBPlayerController : MonoBehaviour
     void Start()
     {
         controls.Player.Shoot.performed += ctx => PlayerShoot();
+        controls.Player.Movement.performed += ctx => PlayerMove();
+    }
+
+    private void PlayerMove()
+    {
+        Vector2 movement = controls.Player.Movement.ReadValue<Vector2>();
+
     }
 
     private void PlayerShoot()
@@ -35,11 +43,5 @@ public class EFBPlayerController : MonoBehaviour
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
         GameObject g = Instantiate(bullet, bulletDir.position, bulletDir.rotation, trash);
         g.SetActive(true);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
