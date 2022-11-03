@@ -239,6 +239,7 @@ MonoBehaviour:
   bullet: {fileID: 3795554218224412121, guid: a184d1048dd1aec4982266a905e2c6a5, type: 3}
   bulletDir: {fileID: 659761729}
   trash: {fileID: 1768536086}
+  cam: {fileID: 2097486071}
 --- !u!1 &358442581
 GameObject:
   m_ObjectHideFlags: 0
