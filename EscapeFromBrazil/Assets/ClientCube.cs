@@ -23,15 +23,14 @@ public class ClientCube : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+            startConexion();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.C)){
-            startConexion();
-        }
+
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
