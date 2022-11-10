@@ -71,12 +71,6 @@ public class ServerCube : MonoBehaviour
 
             }
 
-            Debug.Log("Receives a user");
-
-            byte[] invitation;
-            invitation = Encoding.ASCII.GetBytes("Can Join");
-            newSocket.SendTo(invitation, invitation.Length, SocketFlags.None, Client);
-
             message = ">> " + newMessage;
 
             updateText = true;
