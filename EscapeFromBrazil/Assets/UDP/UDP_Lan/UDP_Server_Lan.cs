@@ -6,72 +6,35 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 using System.Threading;
+using System.IO;
 
 public class UDP_Server_Lan : MonoBehaviour
-{
-
+{ 
     Socket newSocket;
     IPEndPoint ipep;
-    EndPoint Client;
+    EndPoint client;
 
     public TMP_InputField userNameText;
 
-    [SerializeField]
-    private GameObject joinChatPanel;
-    [SerializeField]
-    private GameObject theChatPanel;
-    [SerializeField]
-    private GameObject OnlineChat;
+    MemoryStream serializeStream;
+    MemoryStream deserializeStream;
 
-    public TMP_InputField message;
+    private string username, clientUsername;
 
-    bool updateText;
-
-    private string userName, newMessage;
+    private bool clientLogged = false;
 
     void Update()
     {
-        if (updateText)
-        {
-            UpdateText();
-        }
-    }
-
-    private void UpdateText()
-    {
-        Debug.Log("Modified text");
-
-        byte[] data = new byte[255];
-
-        data = Encoding.ASCII.GetBytes(newMessage);
-
-        newSocket.SendTo(data, data.Length, SocketFlags.None, Client);
-
-        OnlineChat.GetComponent<TextMeshProUGUI>().text += newMessage;
-
-        updateText = false;
-    }
-
-    public void SendButton()
-    {
-        if(message.text == "") return;
-        
-        newMessage = "\n[" + userName + "]:" + message.text;
-
-        message.text = "";
-
-        updateText = true;
+        if (clientLogged) StartCoroutine(SendInfo());
+        Debug.Log(clientUsername);
     }
 
     public void CreateServer()
     {
         Socketing();
 
-        userName = userNameText.text;
-        //Open Chat
-        joinChatPanel.SetActive(false);
-        theChatPanel.SetActive(true);
-
+        username = userNameText.text;
+        GameObject.Find("Join Chat").SetActive(false);
     }
 
     private void Socketing()
@@ -80,9 +43,9 @@ public class UDP_Server_Lan : MonoBehaviour
         ipep = new IPEndPoint(IPAddress.Any, 8000); // un puerto para el host, IPAddress.Any
         newSocket.Bind(ipep);
 
-        // inicializar Client
+        // Inicializar Client
         IPEndPoint sender = new IPEndPoint(IPAddress.Any, 0);
-        Client = (EndPoint)(sender);
+        client = (EndPoint)(sender);
 
         Thread thread = new Thread(ReceieveClients);
 
@@ -93,46 +56,34 @@ public class UDP_Server_Lan : MonoBehaviour
     {
         while (true)
         {
-            byte[] data = new byte[255];
-            int recv = newSocket.ReceiveFrom(data, ref Client);
-
-            string str = Encoding.ASCII.GetString(data);
-            
-            newMessage = "";
-
-            for (int i = 0; i < str.Length; i++)
-            {
-                if (str[i] != 0) { newMessage += str[i]; }
-                else break;
-
-            }
-
-            bool newClient = true;
-
-            for (int i = 0; i < newMessage.Length; i++)
-            {
-                if (newMessage[i] == '\n')
-                {
-                    newClient = false;
-                    break;
-                }
-            }
-
-            if (newClient)
-            {
-                Debug.Log("Receives a user");
-
-                byte[] invitation;
-                invitation = Encoding.ASCII.GetBytes("Can Join");
-                newSocket.SendTo(invitation, invitation.Length, SocketFlags.None, Client);
-
-                newMessage = "\n>> " + newMessage + " joined the chat";
-
-            }
-
-            updateText = true;
-
+            byte[] data = new byte[1024];
+            int recv = newSocket.ReceiveFrom(data, ref client);
+            if (!clientLogged) clientLogged = !clientLogged;
+            deserializeStream = new MemoryStream(data);
+            Deserialize();
         }
     }
 
+    private void Serialize()
+    {
+        serializeStream = new MemoryStream();
+        BinaryWriter writer = new BinaryWriter(serializeStream);
+        writer.Write(username);
+        newSocket.SendTo(serializeStream.ToArray(), serializeStream.ToArray().Length, SocketFlags.None, client);
+        serializeStream.Dispose();
+    }
+
+    private void Deserialize()
+    {
+        BinaryReader reader = new BinaryReader(deserializeStream);
+        deserializeStream.Seek(0, SeekOrigin.Begin);
+        clientUsername = reader.ReadString();
+        deserializeStream.Dispose();
+    }
+
+    IEnumerator SendInfo()
+    {
+        yield return new WaitForSeconds(0.16f);
+        Serialize();
+    }
 }
