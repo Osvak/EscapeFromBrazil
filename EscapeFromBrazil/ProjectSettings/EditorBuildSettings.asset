@@ -6,13 +6,13 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/UDP/Selector.unity
+    path: Assets/Scenes/Selector.unity
     guid: 987b37ff8a5f25c41bcc8b6dcce358f9
   - enabled: 1
-    path: Assets/UDP/UDP_Create Game.unity
+    path: Assets/Scenes/Server.unity
     guid: 5c713e83b8f35c849bd9e67cf6cd02fe
   - enabled: 1
-    path: Assets/UDP/UDP_Join Game.unity
+    path: Assets/Scenes/Client.unity
     guid: 781c4334cf71f864fab854814bb22444
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: e465775c199e1944b8a2dea5a1c8a912, type: 2}

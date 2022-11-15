@@ -9,7 +9,7 @@ using UnityEngine;
 using System.Threading;
 using System.IO;
 
-public class UDP_Client_Lan : MonoBehaviour
+public class UDP_Client : MonoBehaviour
 {
     Socket newSocket;
     IPEndPoint ipep;
@@ -26,11 +26,19 @@ public class UDP_Client_Lan : MonoBehaviour
     private string username, hostUsername;
 
     private bool connected = false;
+    private bool firstTime = true;
+
+    public GameObject joinChatGO;
+    public GameObject backgroundGO;
+    public GameObject gameManager;
+
+    private Vector3 enemyPos;
 
     void Update()
     {
         if (connected) StartCoroutine(SendInfo());
         Debug.Log(hostUsername);
+        Debug.Log("Enemy position: " + enemyPos);
     }
 
     public void EnterServer()
@@ -45,12 +53,16 @@ public class UDP_Client_Lan : MonoBehaviour
 
         username = userNameText.text;
 
+        joinChatGO.SetActive(false);
+        backgroundGO.SetActive(false);
+        gameManager.SetActive(true);
+
         Serialize();
+        firstTime = false;
 
         ReceiveThread = new Thread(Receiver);
         ReceiveThread.Start();
 
-        GameObject.Find("Join Chat").SetActive(false);
     }
 
     private void Receiver()
@@ -68,7 +80,15 @@ public class UDP_Client_Lan : MonoBehaviour
     {
         serializeStream = new MemoryStream();
         BinaryWriter writer = new BinaryWriter(serializeStream);
+        
         writer.Write(username);
+        if(!firstTime)
+        {
+            writer.Write(GameObject.Find("Player").transform.position.x);
+            writer.Write(GameObject.Find("Player").transform.position.y);
+            writer.Write(GameObject.Find("Player").transform.position.z);
+        }
+
         newSocket.SendTo(serializeStream.ToArray(), serializeStream.ToArray().Length, SocketFlags.None, server);
         serializeStream.Dispose();
     }
@@ -77,7 +97,12 @@ public class UDP_Client_Lan : MonoBehaviour
     {
         BinaryReader reader = new BinaryReader(deserializeStream);
         deserializeStream.Seek(0, SeekOrigin.Begin);
+
         hostUsername = reader.ReadString();
+        enemyPos.x = reader.ReadSingle();
+        enemyPos.y = reader.ReadSingle();
+        enemyPos.z = reader.ReadSingle();
+
         deserializeStream.Dispose();
     }
 
