@@ -6,6 +6,10 @@ public class GameManager : MonoBehaviour
 {
     public GameObject gameSetup;
     public GameObject cam;
+
+    public string enemyUsername;
+    public Vector3 enemyPosition;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +21,8 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // Espacio para updatear al enemigo, de este modo separamos player de enemigo y podemos manejar correctamente los dos sin pisar el código del servidor.
+        Debug.Log(enemyUsername);
+        Debug.Log("Enemy Position: " + enemyPosition);
     }
 }

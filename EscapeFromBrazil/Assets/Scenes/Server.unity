@@ -958,6 +958,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameSetup: {fileID: 1549139716}
   cam: {fileID: 393553900}
+  enemyUsername: 
+  enemyPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &782942633
 GameObject:
   m_ObjectHideFlags: 0
@@ -1644,6 +1646,8 @@ MonoBehaviour:
   joinChatGO: {fileID: 815450085}
   backgroundGO: {fileID: 515575594}
   gameManager: {fileID: 751303189}
+  player: {fileID: 1603854249}
+  gameManagerComp: {fileID: 0}
 --- !u!4 &1409383367
 Transform:
   m_ObjectHideFlags: 0
@@ -1740,6 +1744,7 @@ GameObject:
   - component: {fileID: 1603854252}
   - component: {fileID: 1603854251}
   - component: {fileID: 1603854254}
+  - component: {fileID: 1603854255}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1841,6 +1846,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1603854255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1603854249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0464ad673fb0aa4bab281762544d169, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1909532324
 GameObject:
   m_ObjectHideFlags: 0

@@ -23,7 +23,7 @@ public class UDP_Client : MonoBehaviour
     MemoryStream serializeStream;
     MemoryStream deserializeStream;
 
-    private string username, hostUsername;
+    private string username;
 
     private bool connected = false;
     private bool firstTime = true;
@@ -31,14 +31,18 @@ public class UDP_Client : MonoBehaviour
     public GameObject joinChatGO;
     public GameObject backgroundGO;
     public GameObject gameManager;
+    public GameObject player;
 
-    private Vector3 enemyPos;
+    [HideInInspector]
+    public GameManager gameManagerComp;
 
+    private void Awake()
+    {
+        gameManagerComp = gameManager.GetComponent<GameManager>();
+    }
     void Update()
     {
         if (connected) StartCoroutine(SendInfo());
-        Debug.Log(hostUsername);
-        Debug.Log("Enemy position: " + enemyPos);
     }
 
     public void EnterServer()
@@ -84,9 +88,9 @@ public class UDP_Client : MonoBehaviour
         writer.Write(username);
         if(!firstTime)
         {
-            writer.Write(GameObject.Find("Player").transform.position.x);
-            writer.Write(GameObject.Find("Player").transform.position.y);
-            writer.Write(GameObject.Find("Player").transform.position.z);
+            writer.Write(player.transform.position.x);
+            writer.Write(player.transform.position.y);
+            writer.Write(player.transform.position.z);
         }
 
         newSocket.SendTo(serializeStream.ToArray(), serializeStream.ToArray().Length, SocketFlags.None, server);
@@ -98,10 +102,11 @@ public class UDP_Client : MonoBehaviour
         BinaryReader reader = new BinaryReader(deserializeStream);
         deserializeStream.Seek(0, SeekOrigin.Begin);
 
-        hostUsername = reader.ReadString();
-        enemyPos.x = reader.ReadSingle();
-        enemyPos.y = reader.ReadSingle();
-        enemyPos.z = reader.ReadSingle();
+        // Cuando se deserialicen cosas del enemigo, mandarlas al GameManager. Desde ahí updatear al enemigo.
+        gameManagerComp.enemyUsername = reader.ReadString();
+        gameManagerComp.enemyPosition.x = reader.ReadSingle();
+        gameManagerComp.enemyPosition.y = reader.ReadSingle();
+        gameManagerComp.enemyPosition.z = reader.ReadSingle();
 
         deserializeStream.Dispose();
     }
