@@ -91,6 +91,7 @@ public class UDP_Client : MonoBehaviour
             writer.Write(player.transform.position.x);
             writer.Write(player.transform.position.y);
             writer.Write(player.transform.position.z);
+            writer.Write(player.transform.GetChild(0).transform.rotation.eulerAngles.y);
         }
 
         newSocket.SendTo(serializeStream.ToArray(), serializeStream.ToArray().Length, SocketFlags.None, server);
@@ -107,6 +108,7 @@ public class UDP_Client : MonoBehaviour
         gameManagerComp.enemyPosition.x = reader.ReadSingle();
         gameManagerComp.enemyPosition.y = reader.ReadSingle();
         gameManagerComp.enemyPosition.z = reader.ReadSingle();
+        gameManagerComp.enemyRot = reader.ReadSingle();
 
         deserializeStream.Dispose();
     }

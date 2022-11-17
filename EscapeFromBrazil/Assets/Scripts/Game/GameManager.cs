@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public Vector3 enemyPosition;
 
     private GameObject Enemy;
+    public float enemyRot;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,5 +29,6 @@ public class GameManager : MonoBehaviour
         Debug.Log("Enemy Position: " + enemyPosition);
 
         Enemy.transform.position = enemyPosition;
+        Enemy.transform.GetChild(0).localRotation = Quaternion.Euler(new Vector3(0, enemyRot, 0));
     }
 }
