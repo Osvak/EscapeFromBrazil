@@ -10,6 +10,10 @@ public class PlayerMovement : MonoBehaviour
     
     public float speed = 15.0f;
     float MaxLenght = 0f;
+    //-------------
+
+    [SerializeField]
+    private GameObject gunPivot;
 
     private void Awake()
     {
@@ -24,6 +28,21 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         Move();
+        RotateGun();
+
+    }
+
+    private void RotateGun()
+    {
+        //Aim player at mouse
+        //which direction is up
+        Vector3 upAxis = new Vector3(0, 1, 0);
+        Vector3 mouseScreenPosition = Input.mousePosition;
+        //set mouses z to your targets
+        Vector3 mouseWorldSpace = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
+        gunPivot.transform.LookAt(mouseWorldSpace, upAxis);
+        //zero out all rotations except the axis I want
+        gunPivot.transform.rotation = Quaternion.Euler(0, gunPivot.transform.eulerAngles.y, 0);
     }
 
     private void Move()
