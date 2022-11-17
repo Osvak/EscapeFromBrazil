@@ -10,13 +10,18 @@ public class PlayerMovement : MonoBehaviour
     
     public float speed = 15.0f;
     float MaxLenght = 0f;
+
+    private void Awake()
+    {
+        Application.targetFrameRate = 60;
+    }
     // Cread aquí lo que necesitéis para que el player se mueva
     void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
     
-    void Update()
+    void FixedUpdate()
     {
         Move();
     }
