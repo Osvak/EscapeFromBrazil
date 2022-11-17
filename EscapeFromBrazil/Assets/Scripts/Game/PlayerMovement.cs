@@ -28,6 +28,12 @@ public class PlayerMovement : MonoBehaviour
         RIGHT = Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow);
         LEFT = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow);
 
+        //Reset Pos
+        if(Input.GetKey(KeyCode.R))
+        {
+            rb.gameObject.transform.position = new Vector3(0f, 0f, 0f);
+        }
+
         //Move Diagonal
         if (UP && RIGHT)
         {
