@@ -24,12 +24,16 @@ public class UDP_Client : MonoBehaviour
     MemoryStream deserializeStream;
 
     private string username;
-
+    private string enemyUsername;
+    private State state;
     private bool connected = false;
     private bool firstTime = true;
+    private bool updateText = false;
 
+    public TMP_Text versusText;
     public GameObject joinChatGO;
     public GameObject backgroundGO;
+    public GameObject joinGameGO;
     public GameObject gameManager;
     public GameObject player;
 
@@ -40,9 +44,27 @@ public class UDP_Client : MonoBehaviour
     {
         gameManagerComp = gameManager.GetComponent<GameManager>();
     }
+
+    private void Start()
+    {
+        state = State.NONE;
+    }
+
     void Update()
     {
         if (connected) StartCoroutine(SendInfo());
+        if(state == State.GAME && firstTime)
+        {
+            joinGameGO.SetActive(false);
+            backgroundGO.SetActive(false);
+            gameManager.SetActive(true);
+            firstTime = !firstTime;
+        }
+        if(state == State.LOBBY && updateText)
+        {
+            versusText.text = "Waiting for " + enemyUsername + " to start the game.";
+            updateText = false;
+        }
     }
 
     public void EnterServer()
@@ -58,11 +80,9 @@ public class UDP_Client : MonoBehaviour
         username = userNameText.text;
 
         joinChatGO.SetActive(false);
-        backgroundGO.SetActive(false);
-        gameManager.SetActive(true);
+        joinGameGO.SetActive(true);
 
         Serialize();
-        firstTime = false;
 
         ReceiveThread = new Thread(Receiver);
         ReceiveThread.Start();
@@ -73,7 +93,7 @@ public class UDP_Client : MonoBehaviour
     {
         while(true)
         {
-            byte[] data = new byte[1024];
+            byte[] data = new byte[2048];
             int recv = newSocket.ReceiveFrom(data, ref server);
             deserializeStream = new MemoryStream(data);
             Deserialize();
@@ -85,13 +105,22 @@ public class UDP_Client : MonoBehaviour
         serializeStream = new MemoryStream();
         BinaryWriter writer = new BinaryWriter(serializeStream);
         
-        writer.Write(username);
-        if(!firstTime)
+        switch(state)
         {
-            writer.Write(player.transform.position.x);
-            writer.Write(player.transform.position.y);
-            writer.Write(player.transform.position.z);
-            writer.Write(player.transform.GetChild(0).transform.rotation.eulerAngles.y);
+            case State.NONE:
+                writer.Write(username);
+                break;
+            case State.LOBBY:
+                writer.Write(username);
+                break;
+            case State.GAME:
+                writer.Write(player.transform.position.x);
+                writer.Write(player.transform.position.y);
+                writer.Write(player.transform.position.z);
+                writer.Write(player.transform.GetChild(0).transform.rotation.eulerAngles.y);
+                break;
+            default:
+                break;
         }
 
         newSocket.SendTo(serializeStream.ToArray(), serializeStream.ToArray().Length, SocketFlags.None, server);
@@ -103,12 +132,25 @@ public class UDP_Client : MonoBehaviour
         BinaryReader reader = new BinaryReader(deserializeStream);
         deserializeStream.Seek(0, SeekOrigin.Begin);
 
-        // Cuando se deserialicen cosas del enemigo, mandarlas al GameManager. Desde ahí updatear al enemigo.
-        gameManagerComp.enemyUsername = reader.ReadString();
-        gameManagerComp.enemyPosition.x = reader.ReadSingle();
-        gameManagerComp.enemyPosition.y = reader.ReadSingle();
-        gameManagerComp.enemyPosition.z = reader.ReadSingle();
-        gameManagerComp.enemyRot = reader.ReadSingle();
+        state = (State)reader.ReadInt32();
+        switch(state)
+        {
+            case State.NONE:
+                enemyUsername = gameManagerComp.enemyUsername = reader.ReadString();
+                break;
+            case State.LOBBY:
+                enemyUsername = gameManagerComp.enemyUsername = reader.ReadString();
+                updateText = true;
+                break;
+            case State.GAME:
+                gameManagerComp.enemyPosition.x = reader.ReadSingle();
+                gameManagerComp.enemyPosition.y = reader.ReadSingle();
+                gameManagerComp.enemyPosition.z = reader.ReadSingle();
+                gameManagerComp.enemyRot = reader.ReadSingle();
+                break;
+            default:
+                break;
+        }
 
         deserializeStream.Dispose();
     }

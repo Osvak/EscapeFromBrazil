@@ -2,17 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum State 
+{
+    NONE,
+    LOBBY,
+    GAME
+}
+
 public class GameManager : MonoBehaviour
 {
     public GameObject gameSetup;
     public GameObject cam;
 
+    // Enemy variables
+    private GameObject Enemy;
     public string enemyUsername;
     public Vector3 enemyPosition;
-
-    private GameObject Enemy;
     public float enemyRot;
-    // Start is called before the first frame update
+
     void Start()
     {
         gameSetup.SetActive(true);
@@ -21,13 +28,8 @@ public class GameManager : MonoBehaviour
         Enemy = GameObject.Find("Enemy");
     }
 
-    // Update is called once per frame
     void Update()
     {
-        // Espacio para updatear al enemigo, de este modo separamos player de enemigo y podemos manejar correctamente los dos sin pisar el código del servidor.
-        Debug.Log(enemyUsername);
-        Debug.Log("Enemy Position: " + enemyPosition);
-
         Enemy.transform.position = enemyPosition;
         Enemy.transform.GetChild(0).localRotation = Quaternion.Euler(new Vector3(0, enemyRot, 0));
     }
