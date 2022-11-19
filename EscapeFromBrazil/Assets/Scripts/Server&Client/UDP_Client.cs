@@ -36,6 +36,8 @@ public class UDP_Client : MonoBehaviour
     public GameObject joinGameGO;
     public GameObject gameManager;
     public GameObject player;
+    private Shooting ShootManager;
+
 
     [HideInInspector]
     public GameManager gameManagerComp;
@@ -43,6 +45,7 @@ public class UDP_Client : MonoBehaviour
     private void Awake()
     {
         gameManagerComp = gameManager.GetComponent<GameManager>();
+        ShootManager = player.GetComponent<Shooting>();
     }
 
     private void Start()
@@ -121,6 +124,8 @@ public class UDP_Client : MonoBehaviour
                 writer.Write(player.transform.position.y);
                 writer.Write(player.transform.position.z);
                 writer.Write(player.transform.GetChild(0).transform.rotation.eulerAngles.y);
+                writer.Write(ShootManager.shootP);
+                ShootManager.shootP = false;
                 break;
             default:
                 break;
@@ -149,6 +154,10 @@ public class UDP_Client : MonoBehaviour
                 gameManagerComp.enemyPosition.y = reader.ReadSingle();
                 gameManagerComp.enemyPosition.z = reader.ReadSingle();
                 gameManagerComp.enemyRot = reader.ReadSingle();
+                if (reader.ReadBoolean())
+                {
+                    ShootManager.ShootEnemy();
+                }
                 break;
             default:
                 break;

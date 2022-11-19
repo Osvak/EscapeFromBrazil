@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private GameObject gunPivot;
 
+    private bool hit = false;
     private void Awake()
     {
         Application.targetFrameRate = 60;
@@ -107,5 +108,11 @@ public class PlayerMovement : MonoBehaviour
         input.x = input.z = 0;
     }
 
-
+    /*private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Bullet"))
+        {
+            hit = true;
+        }
+    }*/
 }

@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
         cam.transform.rotation = Quaternion.Euler(new Vector3(90, 0, 0));
         cam.transform.position = new Vector3(0, 100f, 0);
         Enemy = GameObject.Find("Enemy");
+        
     }
 
     void Update()
@@ -33,4 +34,5 @@ public class GameManager : MonoBehaviour
         Enemy.transform.position = enemyPosition;
         Enemy.transform.GetChild(0).localRotation = Quaternion.Euler(new Vector3(0, enemyRot, 0));
     }
+
 }
