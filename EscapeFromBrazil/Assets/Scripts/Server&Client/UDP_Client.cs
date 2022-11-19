@@ -75,7 +75,11 @@ public class UDP_Client : MonoBehaviour
         server = new IPEndPoint(IPAddress.Parse(IpServerText.text), 8000);
         newSocket.Connect(server);
 
-        if(newSocket.Connected) connected = !connected;
+        if(newSocket.Connected) 
+        {
+            connected = !connected;
+            state = State.LOBBY;
+        }
 
         username = userNameText.text;
 
@@ -108,7 +112,6 @@ public class UDP_Client : MonoBehaviour
         switch(state)
         {
             case State.NONE:
-                writer.Write(username);
                 break;
             case State.LOBBY:
                 writer.Write(username);
@@ -136,7 +139,6 @@ public class UDP_Client : MonoBehaviour
         switch(state)
         {
             case State.NONE:
-                enemyUsername = gameManagerComp.enemyUsername = reader.ReadString();
                 break;
             case State.LOBBY:
                 enemyUsername = gameManagerComp.enemyUsername = reader.ReadString();

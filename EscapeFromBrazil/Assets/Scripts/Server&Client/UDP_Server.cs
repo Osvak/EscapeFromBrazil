@@ -116,7 +116,6 @@ public class UDP_Server : MonoBehaviour
         switch(state)
         {
             case State.NONE:
-                writer.Write(username);
                 break;
             case State.LOBBY:
                 writer.Write(username);
@@ -143,7 +142,6 @@ public class UDP_Server : MonoBehaviour
         switch(state)
         {
             case State.NONE:
-                enemyUsername = gameManagerComp.enemyUsername = reader.ReadString();
                 break;
             case State.LOBBY:
                 enemyUsername = gameManagerComp.enemyUsername = reader.ReadString();
