@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+
+    [SerializeField]
+    private GameManager gameManager;
+
     Rigidbody rb;
     private bool UP, DOWN, RIGHT, LEFT;
     private Vector3 input;
@@ -12,25 +16,42 @@ public class PlayerMovement : MonoBehaviour
     float MaxLenght = 0f;
     //-------------
 
+    private Vector3 startPos;
+
     [SerializeField]
     private GameObject gunPivot;
 
-    private bool hit = false;
+    public bool hit = false;
+    private State state;
+
     private void Awake()
     {
+        state = State.NONE;
         Application.targetFrameRate = 60;
+
     }
     // Cread aquí lo que necesitéis para que el player se mueva
     void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
-    
+
     void FixedUpdate()
     {
-        Move();
-        RotateGun();
 
+        switch (state)
+        {
+            case State.NONE:
+                break;
+            case State.LOBBY:
+                break;
+            case State.GAME:
+                Move();
+                RotateGun();
+                break;
+            default:
+                break;
+        }
     }
 
     private void RotateGun()
@@ -108,11 +129,23 @@ public class PlayerMovement : MonoBehaviour
         input.x = input.z = 0;
     }
 
-    /*private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Bullet"))
+        if (other.gameObject.CompareTag("Bullet") && !hit)
         {
+            gameManager.HitPlayer();
+            other.gameObject.GetComponent<BulletController>().DestroyBullet();
             hit = true;
         }
-    }*/
+    }
+
+    public void SetState(State newState)
+    {
+        state = newState;
+    }
+
+    public State GetState()
+    {
+        return state;
+    }
 }

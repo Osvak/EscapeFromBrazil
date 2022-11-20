@@ -25,7 +25,9 @@ public class UDP_Client : MonoBehaviour
 
     private string username;
     private string enemyUsername;
+
     private State state;
+
     private bool connected = false;
     private bool firstTime = true;
     private bool updateText = false;
@@ -34,6 +36,7 @@ public class UDP_Client : MonoBehaviour
     public GameObject joinChatGO;
     public GameObject backgroundGO;
     public GameObject joinGameGO;
+    public GameObject score;
     public GameObject gameManager;
     public GameObject player;
     private Shooting ShootManager;
@@ -41,11 +44,14 @@ public class UDP_Client : MonoBehaviour
 
     [HideInInspector]
     public GameManager gameManagerComp;
+    private PlayerMovement playerMov;
 
     private void Awake()
     {
         gameManagerComp = gameManager.GetComponent<GameManager>();
+        gameManagerComp.side = Side.CLIENT;
         ShootManager = player.GetComponent<Shooting>();
+        playerMov = player.GetComponent<PlayerMovement>();
     }
 
     private void Start()
@@ -55,12 +61,15 @@ public class UDP_Client : MonoBehaviour
 
     void Update()
     {
+
         if (connected) StartCoroutine(SendInfo());
         if(state == State.GAME && firstTime)
         {
             joinGameGO.SetActive(false);
             backgroundGO.SetActive(false);
+            score.SetActive(true);
             gameManager.SetActive(true);
+            gameManagerComp.SetState(state);
             firstTime = !firstTime;
         }
         if(state == State.LOBBY && updateText)
@@ -82,6 +91,7 @@ public class UDP_Client : MonoBehaviour
         {
             connected = !connected;
             state = State.LOBBY;
+            gameManagerComp.SetState(state);
         }
 
         username = userNameText.text;
@@ -126,6 +136,11 @@ public class UDP_Client : MonoBehaviour
                 writer.Write(player.transform.GetChild(0).transform.rotation.eulerAngles.y);
                 writer.Write(ShootManager.shootP);
                 ShootManager.shootP = false;
+                writer.Write(playerMov.hit);
+                if (playerMov.hit)
+                {
+                    playerMov.hit = false;
+                }
                 break;
             default:
                 break;
@@ -158,6 +173,10 @@ public class UDP_Client : MonoBehaviour
                 {
                     ShootManager.ShootEnemy();
                 }
+                if (reader.ReadBoolean())
+                {
+                    gameManagerComp.HitEnemy();
+                }
                 break;
             default:
                 break;
@@ -165,6 +184,8 @@ public class UDP_Client : MonoBehaviour
 
         deserializeStream.Dispose();
     }
+
+
 
     IEnumerator SendInfo()
     {

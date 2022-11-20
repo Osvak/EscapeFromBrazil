@@ -7,11 +7,12 @@ public class BulletController : MonoBehaviour
     [SerializeField] private float bulletLifespan = 3f;
     private void Start()
     {
-        Invoke("DestroyBullet",1);
+        Invoke("DestroyBullet", bulletLifespan);
     }
     // Start is called before the first frame update
-    void DestroyBullet()
+    public void DestroyBullet()
     {
         Destroy(gameObject);
     }
+
 }

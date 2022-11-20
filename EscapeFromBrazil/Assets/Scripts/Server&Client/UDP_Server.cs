@@ -28,12 +28,14 @@ public class UDP_Server : MonoBehaviour
     public GameObject backgroundGO;
     public GameObject joinGameGO;
     public GameObject joinGameButton;
+    public GameObject score;
     public GameObject gameManager;
     public TMP_Text versusText;
     private bool updateText = false;
 
     public GameObject player;
     private Shooting ShootManager;
+    private PlayerMovement playerMov;
 
     [HideInInspector]
     public GameManager gameManagerComp;
@@ -41,7 +43,10 @@ public class UDP_Server : MonoBehaviour
     private void Awake()
     {
         gameManagerComp = gameManager.GetComponent<GameManager>();
+        gameManagerComp.side = Side.SERVER;
         ShootManager = player.GetComponent<Shooting>();
+        playerMov = player.GetComponent<PlayerMovement>();
+
     }
 
     private void Start()
@@ -51,6 +56,7 @@ public class UDP_Server : MonoBehaviour
 
     void Update()
     {
+
         if (state == State.GAME) StartCoroutine(SendInfo());
         if(updateText) 
         {
@@ -71,6 +77,7 @@ public class UDP_Server : MonoBehaviour
         joinGameGO.SetActive(true);
         versusText.text = "Waiting for an oponent...";
         state = State.LOBBY;
+        gameManagerComp.SetState(state);
     }
 
     public void EnterGame()
@@ -78,7 +85,9 @@ public class UDP_Server : MonoBehaviour
         state = State.GAME;
         backgroundGO.SetActive(false);
         joinGameGO.SetActive(false);
+        score.SetActive(true);
         gameManager.SetActive(true);
+        gameManagerComp.SetState(state);
         Serialize();
     }
 
@@ -129,6 +138,11 @@ public class UDP_Server : MonoBehaviour
                 writer.Write(player.transform.GetChild(0).transform.rotation.eulerAngles.y);
                 writer.Write(ShootManager.shootP);
                 ShootManager.shootP = false;
+                writer.Write(playerMov.hit);
+                if (playerMov.hit)
+                {
+                    playerMov.hit = false;
+                }
                 break;
             default:
                 break;
@@ -159,6 +173,11 @@ public class UDP_Server : MonoBehaviour
                 {
                     ShootManager.ShootEnemy();
                 }
+                if (reader.ReadBoolean())
+                {
+                    gameManagerComp.HitEnemy();
+                }
+
                 break;
             default:
                 break;
