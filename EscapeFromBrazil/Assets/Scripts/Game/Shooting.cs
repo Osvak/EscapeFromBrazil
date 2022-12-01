@@ -19,10 +19,13 @@ public class Shooting : MonoBehaviour
     private Transform enemyGun;
 
     private State state;
+
+    private GameObject trash;
     private void Awake()
     {
         player = GetComponent<PlayerMovement>();
         enemyGun = GameObject.Find("Enemy").gameObject.transform.GetChild(0).gameObject.transform.GetChild(1).gameObject.transform;
+        trash = GameObject.Find("Trash");
     }
 
     // Update is called once per frame
@@ -58,6 +61,7 @@ public class Shooting : MonoBehaviour
         shootP = true;
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         bullet.GetComponent<Rigidbody>().AddForce(firePoint.up*bulletForce,ForceMode.Impulse);
+        bullet.transform.parent = trash.transform;
     }
 
     public void ShootEnemy()

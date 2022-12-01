@@ -46,8 +46,11 @@ public class GameManager : MonoBehaviour
     public Slider playerSlider;
     public Slider enemySlider;
 
+    private GameObject trash;
+
     private void Awake()
     {
+        trash = GameObject.Find("Trash");
         ResetGame();
     }
     void Start()
@@ -125,6 +128,9 @@ public class GameManager : MonoBehaviour
 
     private void ResetGame()
     {
+        foreach (Transform child in trash.transform)
+            GameObject.Destroy(child.gameObject);
+
         playerHp = startingHp;
         enemyHp = startingHp;
 

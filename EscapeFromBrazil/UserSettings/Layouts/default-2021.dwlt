@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Hierarchy
+  m_Title: Project
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 17
+  controlID: 98
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -68,8 +68,8 @@ MonoBehaviour:
     y: 0
     width: 491
     height: 947
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
@@ -223,7 +223,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 29
+  controlID: 99
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -248,7 +248,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 30
+  controlID: 100
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -325,14 +325,14 @@ MonoBehaviour:
   m_LastFolders:
   - Assets/Scenes
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: D:\UnityProyects\EscapeFromBrazil\EscapeFromBrazil
+  m_LastProjectPath: D:\oscar\Documents\repos\EscapeFromBrazil\EscapeFromBrazil
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: f68c0000
-    m_LastClickedID: 36086
-    m_ExpandedIDs: 00000000da8c0000f88c000000ca9a3b
+    m_SelectedIDs: fc8d0000
+    m_LastClickedID: 36348
+    m_ExpandedIDs: 00000000f08d0000fe8d000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -360,7 +360,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000da8c0000
+    m_ExpandedIDs: 00000000f08d0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -387,7 +387,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -488,9 +488,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
+      m_SelectedIDs: babc0000
       m_LastClickedID: 0
-      m_ExpandedIDs: f287feff3e88feff388afeffb68afeffc08afeff1c92feff6892feff6294feffe094feffea94feff1298feff5e98feff589afeffd69afeffe09afeff7a9efeffc69efeffc0a0feff3ea1feff48a1feffb6a4feff02a5fefffca6feff7aa7feff84a7feffe6abfeff32acfeff2caefeffaaaefeffb4aefeff3cb2feff88b2feff82b4feff00b5feff0ab5feff50b7feff9cb7feff9ab9feff1cbafeff2abafeff9abafeff58bbfeff16bcfeffd2bcfeff48c0feff94c0feff8ec2feff0cc3feff16c3feff44c7feff90c7feff8ac9feff08cafeff12cafeff42cffeff8ecffeff8cd1feff0ed2feff1cd2feff76d3feffc4d4feffe0d5feff04dcfeff50dcfeff52defeffd8defeffe6defeff52dffeffd2e0feff3ae2fefffee4feff4ae5feffbae5feff28e6feff32e6feff2ae7feff76e7feff72e9feffe2e9feffeee9fefff6eafeffbceffeff08f0feff0af2feff90f2feff9ef2feff0ef3feffbef3feff6af4fefff4f6feff40f7fefff0f7feff9cf8feffaafcfefff6fcfefff4fefeff62fffeff6efffeff0402fffffe03ffff2008ffff6c08ffff680affffd80affffe40affffde0bffff9a0cffff7a0dffff380effff9228ffff8e2fffffda2fffff5632ffff5e33ffff624affffae4affffa84cffff264dffff304dffff4652ffff9252ffff8c54ffff0a55ffff1455ffff0a59ffff5659ffff505bffffce5bffffd85bffff745fffffc05fffffba61ffff3862ffff4262ffff306fffff7c6fffff7671fffff471fffffe71ffff0676ffff5676ffff4e78ffffc878ffffd278ffff8c7fffff9880ffffe480ffffdc82ffff4883ffff5483ffff2c85ffff6a86ffffd28dffff1e8effff1c90ffff9e90ffffac90ffff2c91ffff4894ffff2295ffff0296ffffb696ffff9e97ffffc69affff789bffff629cffff549dffff669fffffb29fffffaca1ffff2ca2ffff36a2ffff20a8ffff6ca8ffff6aaaffffeeaafffffcaaffff52acffffc6c8ffff50caffff34daffff24e3ffff08e4ffff54e4ffff50e6ffffc0e6ffffcce6ffff48ebfffffcebffffb4ecffffe8edffff9ceeffff54efffff08f0ffffd2f1ffff2af3ffff00f4ffff34f5ffff80f5ffff80f7fffff4f7ffff04f8ffff34fbfffff64801004a7701009030020084bb02009c0204009abb040044180500a0180500ba18050034320800c01c090048520d005e820d0062820d0014df0d0072df0d0082df0d0086df0d0090df0d00b0c70e0092f50e0038b00f00dab00f00f4b00f006e6b1000786b1000c8c81000dcc810004ae0110064e0110032e1130048e113004ce1130082e113001e58150022b6150078121600602b1700c48817009c431800b2431800b6431800
+      m_ExpandedIDs: de7cffff1e8effff6c8effffa690ffff5691ffff6291fffff892ffff96c0ffffe4c0ffff20c3ffffcec3ffffdac3ffff58e4ffffa6e4ffffe2e6ffff90e7ffff9ce7ffff14f0ffff62f0ffff9ef2ffff4cf3ffff58f3ffff82f4ffff0cf6ffff9cfaffff847b0300
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -739,9 +739,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 488.5479, y: 283.23587, z: 2.00354}
+    m_Target: {x: -15, y: 0.63999975, z: 0.09999943}
     speed: 2
-    m_Value: {x: 488.5479, y: 283.23587, z: 2.00354}
+    m_Value: {x: -15, y: 0.63999975, z: 0.09999943}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -770,17 +770,17 @@ MonoBehaviour:
       m_Size: {x: 1, y: 1}
     yGrid:
       m_Fade:
-        m_Target: 0
+        m_Target: 1
         speed: 2
-        m_Value: 0
+        m_Value: 1
       m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.4}
       m_Pivot: {x: 0, y: 0, z: 0}
       m_Size: {x: 1, y: 1}
     zGrid:
       m_Fade:
-        m_Target: 1
+        m_Target: 0
         speed: 2
-        m_Value: 1
+        m_Value: 0
       m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.4}
       m_Pivot: {x: 0, y: 0, z: 0}
       m_Size: {x: 1, y: 1}
@@ -788,13 +788,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0, y: 0, z: 0, w: 1}
+    m_Target: {x: 0.46658027, y: -0.393746, z: 0.2437984, w: 0.75355685}
     speed: 2
-    m_Value: {x: 0, y: 0, z: 0, w: 1}
+    m_Value: {x: 0.46657592, y: -0.39374232, z: 0.24379614, w: 0.7535498}
   m_Size:
-    m_Target: 345.02975
+    m_Target: 7.1818204
     speed: 2
-    m_Value: 345.02975
+    m_Value: 7.1818204
   m_Ortho:
     m_Target: 1
     speed: 2
