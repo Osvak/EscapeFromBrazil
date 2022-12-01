@@ -47,6 +47,7 @@ public class Shooting : MonoBehaviour
                 {
                     GameObject bullet = Instantiate(bulletPrefab, enemyGun.position, enemyGun.rotation);
                     bullet.GetComponent<Rigidbody>().AddForce(enemyGun.up * bulletForce, ForceMode.Impulse);
+                    bullet.transform.parent = trash.transform;
                     shootE = false;
                 }
                 return;
