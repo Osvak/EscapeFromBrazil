@@ -34,12 +34,12 @@ public class GameManager : MonoBehaviour
     private State state;
     public Side side;
 
+    // UI
     [SerializeField]
     private TMP_Text serverScore;
     [SerializeField]
     private TMP_Text clientScore;
 
-    // UI
     private int playerHp, enemyHp;
     [SerializeField] private int startingHp = 3;
     private bool updateScore;
@@ -48,15 +48,13 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        playerHp = 3;
-        enemyHp = 3;
+        ResetGame();
     }
     void Start()
     {
         gameSetup.SetActive(true);
         cam.transform.rotation = Quaternion.Euler(new Vector3(90, 0, 0));
         cam.transform.position = new Vector3(0, 100f, 0);
-        
     }
 
     void Update()
@@ -66,6 +64,10 @@ public class GameManager : MonoBehaviour
 
         if (updateScore)
         {
+            if(playerHp <= 0 || enemyHp <= 0)
+            {
+                ResetGame();
+            }
             if (side == Side.SERVER)
             {
                 serverScore.text = playerHp.ToString();
@@ -119,5 +121,13 @@ public class GameManager : MonoBehaviour
             playerSlider.value = (float)enemyHp;
             enemySlider.value = (float)playerHp;
         }
+    }
+
+    private void ResetGame()
+    {
+        playerHp = startingHp;
+        enemyHp = startingHp;
+
+        Player.PlayerReset();
     }
 }

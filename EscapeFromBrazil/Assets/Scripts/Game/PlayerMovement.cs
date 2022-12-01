@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
     {
         state = State.NONE;
         Application.targetFrameRate = 60;
-
+        startPos = transform.position;
     }
     // Cread aquí lo que necesitéis para que el player se mueva
     void Start()
@@ -152,5 +152,10 @@ public class PlayerMovement : MonoBehaviour
     public State GetState()
     {
         return state;
+    }
+
+    public void PlayerReset()
+    {
+        transform.position = startPos;
     }
 }
