@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Text;
 using TMPro;
+using UnityEngine.UI;
 
 public enum State 
 {
@@ -38,13 +39,17 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private TMP_Text clientScore;
 
-    private int playerLive, enemyLive;
+    // UI
+    private int playerHp, enemyHp;
+    [SerializeField] private int startingHp = 3;
     private bool updateScore;
+    public Slider playerSlider;
+    public Slider enemySlider;
 
     private void Awake()
     {
-        playerLive = 0;
-        enemyLive = 0;
+        playerHp = 3;
+        enemyHp = 3;
     }
     void Start()
     {
@@ -63,15 +68,15 @@ public class GameManager : MonoBehaviour
         {
             if (side == Side.SERVER)
             {
-                serverScore.text = playerLive.ToString();
-                clientScore.text = enemyLive.ToString();
+                serverScore.text = playerHp.ToString();
+                clientScore.text = enemyHp.ToString();
             }
             else
             {
-                serverScore.text = enemyLive.ToString();
-                clientScore.text = playerLive.ToString();
+                serverScore.text = enemyHp.ToString();
+                clientScore.text = playerHp.ToString();
             }
-
+            UpdateSlider();
             updateScore = false;
         }
     }
@@ -90,7 +95,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Player hit Enemy");
 
-        enemyLive += 1;
+        enemyHp -= 1;
         updateScore = true;
     }
 
@@ -98,7 +103,21 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Enemy hit Player");
 
-        playerLive += 1;
+        playerHp -= 1;
         updateScore = true;
+    }
+
+    private void UpdateSlider()
+    {
+        if(side == Side.SERVER)
+        {
+            playerSlider.value = (float)playerHp;
+            enemySlider.value = (float)enemyHp;
+        }
+        else
+        {
+            playerSlider.value = (float)enemyHp;
+            enemySlider.value = (float)playerHp;
+        }
     }
 }
