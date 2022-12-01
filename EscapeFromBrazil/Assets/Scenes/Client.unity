@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.43749002, g: 0.4853111, b: 0.56558555, a: 1}
+  m_IndirectSpecularColor: {r: 0.43749008, g: 0.48531115, b: 0.5655858, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1713,8 +1713,8 @@ MonoBehaviour:
   serverScore: {fileID: 1454207268}
   clientScore: {fileID: 1374501820}
   startingHp: 3
-  playerSlider: {fileID: 314532868}
-  enemySlider: {fileID: 1335579905}
+  playerSlider: {fileID: 1335579905}
+  enemySlider: {fileID: 314532868}
 --- !u!1 &1246607377
 GameObject:
   m_ObjectHideFlags: 0
