@@ -16,6 +16,13 @@ public class Shooting : MonoBehaviour
     public bool shootP= false;
     private bool shootE= false;
 
+    private bool canShoot = true;
+
+    [SerializeField]
+    private float fireCooldown = 0.5f;
+
+    //private float fireRate = 3;
+
     private Transform enemyGun;
 
     private State state;
@@ -39,9 +46,9 @@ public class Shooting : MonoBehaviour
             case State.LOBBY:
                 break;
             case State.GAME:
-                if (Input.GetKeyDown(KeyCode.Mouse0) && !shootP)
+                if ((Input.GetKey(KeyCode.Mouse0) && !shootP) && canShoot)
                 {
-                    Shoot();
+                    StartCoroutine(Shoot());
                 }
                 if (shootE)
                 {
@@ -57,16 +64,27 @@ public class Shooting : MonoBehaviour
         state = player.GetState();
     }
 
-    private void Shoot()
+    IEnumerator Shoot()
     {
+        canShoot = false;
         shootP = true;
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         bullet.GetComponent<Rigidbody>().AddForce(firePoint.up*bulletForce,ForceMode.Impulse);
         bullet.transform.parent = trash.transform;
+        // Start Delay
+        StartCoroutine(FireRateHandler());
+        yield return null;
     }
 
     public void ShootEnemy()
     {
         shootE = true;
+    }
+    IEnumerator FireRateHandler()
+    {
+        //float timeToNextShot = 1 / fireRate;
+        //yield return new WaitForSeconds(fireRate);
+        yield return new WaitForSeconds(fireCooldown);
+        canShoot = true;
     }
 }
