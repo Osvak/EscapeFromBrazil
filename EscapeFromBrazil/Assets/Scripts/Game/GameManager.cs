@@ -136,4 +136,26 @@ public class GameManager : MonoBehaviour
 
         Player.PlayerReset();
     }
+
+    /*
+     PowerUpAppears
+    PowerUpDisappears
+     */
+    public void PowerUpAppears(Vector3 pos,PoweUp.PuType type)
+    {
+        /*
+         Al powerUpManager llamar a la funcion: 
+        SpawnPowerUPClient(pos,type);
+        
+        Esto ser hara cuando el cliente reciba datos cuando se cree un PowerUp en el servidor, deberemos recibir posicion y el tipo de este
+         */
+    }
+
+    public void PowerUpDisappears()
+    {
+        /*
+        A esto se llamara cuando el rival coja un powerUp
+        Deberemos destruir el PowerUP
+         */
+    }
 }
