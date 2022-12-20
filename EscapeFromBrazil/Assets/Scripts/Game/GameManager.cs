@@ -22,8 +22,10 @@ public class GameManager : MonoBehaviour
 {
     public GameObject gameSetup;
     public GameObject cam;
+    private State state;
+    public Side side;
 
-    // Enemy variables
+    [Header("Enemy variables")]
     [SerializeField]
     private PlayerMovement Player;
     [SerializeField]
@@ -31,10 +33,9 @@ public class GameManager : MonoBehaviour
     public string enemyUsername;
     public Vector3 enemyPosition;
     public float enemyRot;
-    private State state;
-    public Side side;
 
-    // UI
+    
+    [Header("UI")]
     [SerializeField]
     private TMP_Text serverScore;
     [SerializeField]
@@ -46,12 +47,38 @@ public class GameManager : MonoBehaviour
     public Slider playerSlider;
     public Slider enemySlider;
 
+    [Header("PowerUp")]
+    [SerializeField] private PowerUpManager powerUpManager;
+    public bool PU_active = false, PU_delete = false;
+    public Vector3 PU_pos = Vector3.zero;
+    public int PU_type = 0;
+    public int PU_activeID = 0,PU_deleteID = 0;
+
+
     private GameObject trash;
 
     private void Awake()
     {
         trash = GameObject.Find("Trash");
-        ResetGame();
+        //ResetGame();
+        foreach (Transform child in trash.transform)
+            GameObject.Destroy(child.gameObject);
+
+        playerHp = startingHp;
+        enemyHp = startingHp;
+
+        Player.PlayerReset();
+
+        if (side == Side.SERVER)
+        {
+            serverScore.text = playerHp.ToString();
+            clientScore.text = enemyHp.ToString();
+        }
+        else
+        {
+            serverScore.text = enemyHp.ToString();
+            clientScore.text = playerHp.ToString();
+        }
     }
     void Start()
     {
@@ -135,27 +162,37 @@ public class GameManager : MonoBehaviour
         enemyHp = startingHp;
 
         Player.PlayerReset();
+        powerUpManager.Restart();
     }
 
-    /*
-     PowerUpAppears
-    PowerUpDisappears
-     */
-    public void PowerUpAppears(Vector3 pos,PoweUp.PuType type)
+    //--PowerUP
+
+    public void SendPowerUP(Vector3 pos, int type, int id)
     {
-        /*
-         Al powerUpManager llamar a la funcion: 
-        SpawnPowerUPClient(pos,type);
-        
-        Esto ser hara cuando el cliente reciba datos cuando se cree un PowerUp en el servidor, deberemos recibir posicion y el tipo de este
-         */
+        PU_active = true;
+        PU_pos = pos;
+        PU_type = type;
+        PU_activeID = id;
     }
 
-    public void PowerUpDisappears()
+    public void PowerUpAppears()
+    {
+        powerUpManager.SpawnPowerUPClient(new Vector3(PU_pos.x, PU_pos.y, PU_pos.z), PU_type, PU_activeID);
+    }
+
+    public void PowerUpDisappears(int id)
     {
         /*
-        A esto se llamara cuando el rival coja un powerUp
-        Deberemos destruir el PowerUP
+        A esto se llamara cuando el Player coja un powerUp
+        Cambiaremos la id y avisaremos al rival de cual debe destruir
          */
+        PU_deleteID = id;
+        PU_delete = true;
+    }
+
+    public void EnemyCatchesPowerUp(int id)
+    {
+        //cuando reciba que el enemigo a cogido un PowerUp
+        powerUpManager.DeletePowerUp(id);
     }
 }

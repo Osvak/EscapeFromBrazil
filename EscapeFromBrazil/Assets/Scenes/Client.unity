@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.43749002, g: 0.4853111, b: 0.56558555, a: 1}
+  m_IndirectSpecularColor: {r: 0.43749025, g: 0.48531145, b: 0.5655863, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1554,6 +1554,78 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1155623656}
   m_CullTransparentMesh: 1
+--- !u!1001 &1165656141
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5004944792607630640, guid: f60443903cfe8b140b1739d503e44744, type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 1200581543}
+    - target: {fileID: 5004944792607630641, guid: f60443903cfe8b140b1739d503e44744, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5004944792607630641, guid: f60443903cfe8b140b1739d503e44744, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5004944792607630641, guid: f60443903cfe8b140b1739d503e44744, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5004944792607630641, guid: f60443903cfe8b140b1739d503e44744, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5004944792607630641, guid: f60443903cfe8b140b1739d503e44744, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5004944792607630641, guid: f60443903cfe8b140b1739d503e44744, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5004944792607630641, guid: f60443903cfe8b140b1739d503e44744, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5004944792607630641, guid: f60443903cfe8b140b1739d503e44744, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5004944792607630641, guid: f60443903cfe8b140b1739d503e44744, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5004944792607630641, guid: f60443903cfe8b140b1739d503e44744, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5004944792607630641, guid: f60443903cfe8b140b1739d503e44744, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5004944792607630643, guid: f60443903cfe8b140b1739d503e44744, type: 3}
+      propertyPath: m_Name
+      value: PowerUpManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f60443903cfe8b140b1739d503e44744, type: 3}
+--- !u!114 &1165656142 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5004944792607630640, guid: f60443903cfe8b140b1739d503e44744, type: 3}
+  m_PrefabInstance: {fileID: 1165656141}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f103ce7ac6b97e4ebf552d88acb13a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1188201453
 GameObject:
   m_ObjectHideFlags: 0
@@ -1735,17 +1807,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameSetup: {fileID: 1110386412}
   cam: {fileID: 1146823075}
+  side: 1
   Player: {fileID: 314532867}
   Enemy: {fileID: 1335579904}
   enemyUsername: 
   enemyPosition: {x: 0, y: 0, z: 0}
   enemyRot: 0
-  side: 1
   serverScore: {fileID: 1454207268}
   clientScore: {fileID: 1374501820}
   startingHp: 3
   playerSlider: {fileID: 1335579905}
   enemySlider: {fileID: 314532868}
+  powerUpManager: {fileID: 1165656142}
+  PU_active: 0
+  PU_pos: {x: 0, y: 0, z: 0}
+  PU_type: 0
+  PU_ID: 0
 --- !u!1 &1246607377
 GameObject:
   m_ObjectHideFlags: 0

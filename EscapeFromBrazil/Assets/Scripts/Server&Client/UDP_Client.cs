@@ -141,6 +141,14 @@ public class UDP_Client : MonoBehaviour
                 {
                     playerMov.hit = false;
                 }
+
+                // Delete PowerUp
+                writer.Write(gameManagerComp.PU_delete);
+                if (gameManagerComp.PU_delete)
+                {
+                    writer.Write(gameManagerComp.PU_deleteID);
+                    gameManagerComp.PU_delete = false;
+                }
                 break;
             default:
                 break;
@@ -177,6 +185,24 @@ public class UDP_Client : MonoBehaviour
                 {
                     gameManagerComp.HitEnemy();
                 }
+
+                // PowerUp
+                if (reader.ReadBoolean())
+                {
+                    gameManagerComp.PU_pos.x = reader.ReadSingle();
+                    gameManagerComp.PU_pos.y = reader.ReadSingle();
+                    gameManagerComp.PU_pos.z = reader.ReadSingle();
+                    gameManagerComp.PU_type = reader.ReadInt32();
+                    gameManagerComp.PU_activeID = reader.ReadInt32();
+                    gameManagerComp.PowerUpAppears();
+                }
+
+                // Delete PowerUp
+                if (reader.ReadBoolean())
+                {
+                    gameManagerComp.EnemyCatchesPowerUp(reader.ReadInt32());
+                }
+
                 break;
             default:
                 break;

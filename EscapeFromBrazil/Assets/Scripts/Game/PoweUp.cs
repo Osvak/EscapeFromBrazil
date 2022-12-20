@@ -7,49 +7,29 @@ public class PoweUp : MonoBehaviour
 
     private PowerUpManager powerUpManager;
 
-    public enum PuType
-    {
-        Live1,
-        FiringRate
-    } 
-
-    public PuType type;
+    public int type = 0;
     private bool delete = false;
-
-
-    PoweUp(PuType type)
-    {
-        this.type = type;
-    }
-
-    // Start is called before the first frame update
-    void Start()
+    private int ID;
+    public void StartSpawn(Vector3 pos, int _type,int id)
     {
         powerUpManager = this.GetComponentInParent<PowerUpManager>();
-        type = (PuType)Random.Range(0, 2);
+        transform.position = pos;
+        type = _type;
+        ID = id;
 
     }
 
     public void SetType(int _type)
     {
-        type = (PuType)_type;
+        type = _type;
     }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && !delete)
         {
             delete = true;
-            powerUpManager.ActivePowerUp(type);
-            Destroy(gameObject);
+            powerUpManager.ActivePowerUp((PowerUpManager.PuType)type,ID);
         }
 
     }
