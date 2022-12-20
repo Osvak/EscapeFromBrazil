@@ -19,7 +19,8 @@ public class Shooting : MonoBehaviour
     private bool canShoot = true;
 
     [SerializeField]
-    private float fireCooldown = 0.5f;
+    public float defaultFireCooldown = 0.5f;
+    public float actualFireCooldown;
 
     //private float fireRate = 3;
 
@@ -84,7 +85,17 @@ public class Shooting : MonoBehaviour
     {
         //float timeToNextShot = 1 / fireRate;
         //yield return new WaitForSeconds(fireRate);
-        yield return new WaitForSeconds(fireCooldown);
+        yield return new WaitForSeconds(actualFireCooldown);
         canShoot = true;
+    }
+
+    public void PowerUpFireRate()
+    {
+        actualFireCooldown *= 0.5f;
+    }
+
+    public void ResetFireRate()
+    {
+        actualFireCooldown = defaultFireCooldown;
     }
 }

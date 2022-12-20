@@ -130,7 +130,7 @@ public class PowerUpManager : MonoBehaviour
             case PuType.Live1:
 
                 Debug.Log("enemy got extra life");
-
+                gameManager.PowerUp1HPEnemy();
                 break;
             case PuType.FiringRate:
 
@@ -155,12 +155,12 @@ public class PowerUpManager : MonoBehaviour
             case PuType.Live1:
 
                 Debug.Log("Player got extra life");
-
+                gameManager.PowerUp1HPPlayer();
                 break;
             case PuType.FiringRate:
 
                 Debug.Log("Player got increased rate of fire");
-
+                gameManager.Player.PowerUpFireRatePlayer();
                 break;
             default:
                 break;

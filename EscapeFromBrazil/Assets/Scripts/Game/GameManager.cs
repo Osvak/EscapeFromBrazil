@@ -27,9 +27,9 @@ public class GameManager : MonoBehaviour
 
     [Header("Enemy variables")]
     [SerializeField]
-    private PlayerMovement Player;
+    public PlayerMovement Player;
     [SerializeField]
-    private GameObject Enemy;
+    public GameObject Enemy;
     public string enemyUsername;
     public Vector3 enemyPosition;
     public float enemyRot;
@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
     private TMP_Text clientScore;
 
     private int playerHp, enemyHp;
-    [SerializeField] private int startingHp = 3;
+    private int startingHp = 4;
     private bool updateScore;
     public Slider playerSlider;
     public Slider enemySlider;
@@ -194,5 +194,18 @@ public class GameManager : MonoBehaviour
     {
         //cuando reciba que el enemigo a cogido un PowerUp
         powerUpManager.DeletePowerUp(id);
+    }
+
+    public void PowerUp1HPPlayer()
+    {
+        if(playerHp < startingHp) playerHp += 1;
+        
+        updateScore = true;
+    }    
+    public void PowerUp1HPEnemy()
+    {
+        if (enemyHp < startingHp) enemyHp += 1;
+
+        updateScore = true;
     }
 }

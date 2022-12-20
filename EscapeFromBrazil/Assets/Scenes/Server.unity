@@ -1061,7 +1061,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: Username
+  m_Text: ServerUser
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -1295,14 +1295,16 @@ MonoBehaviour:
   enemyRot: 0
   serverScore: {fileID: 814940192}
   clientScore: {fileID: 836160335}
-  startingHp: 3
+  startingHp: 4
   playerSlider: {fileID: 344276231}
   enemySlider: {fileID: 16880075}
   powerUpManager: {fileID: 575138570}
   PU_active: 0
+  PU_delete: 0
   PU_pos: {x: 0, y: 0, z: 0}
   PU_type: 0
-  PU_ID: 0
+  PU_activeID: 0
+  PU_deleteID: 0
 --- !u!1 &782942633
 GameObject:
   m_ObjectHideFlags: 0
@@ -1361,7 +1363,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Username\u200B"
+  m_text: "ServerUser\u200B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -107521,7 +107523,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8991193268371285089, guid: 59e572da967b5e8449020f9fc994aea9, type: 3}
       propertyPath: m_Value
-      value: 3
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8991193268371285089, guid: 59e572da967b5e8449020f9fc994aea9, type: 3}
+      propertyPath: m_MaxValue
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8991193268400075357, guid: 59e572da967b5e8449020f9fc994aea9, type: 3}
       propertyPath: m_AnchorMax.x
@@ -112593,6 +112599,18 @@ PrefabInstance:
     - target: {fileID: 1669583787732020791, guid: 9e8cb1af1321e8344ab480e88528e711, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3189735974183840420, guid: 9e8cb1af1321e8344ab480e88528e711, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7118879101774273218, guid: 9e8cb1af1321e8344ab480e88528e711, type: 3}
+      propertyPath: m_Value
+      value: 3.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 7118879101774273218, guid: 9e8cb1af1321e8344ab480e88528e711, type: 3}
+      propertyPath: m_MaxValue
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7118879101800991998, guid: 9e8cb1af1321e8344ab480e88528e711, type: 3}
       propertyPath: m_AnchorMax.x

@@ -24,11 +24,14 @@ public class PlayerMovement : MonoBehaviour
     public bool hit = false;
     private State state;
 
+    private Shooting shooting;
+
     private void Awake()
     {
         state = State.NONE;
         Application.targetFrameRate = 60;
         startPos = transform.position;
+        shooting = this.GetComponent<Shooting>();
     }
     // Cread aquí lo que necesitéis para que el player se mueva
     void Start()
@@ -157,5 +160,11 @@ public class PlayerMovement : MonoBehaviour
     public void PlayerReset()
     {
         transform.position = startPos;
+        shooting.ResetFireRate();
+    }
+
+    public void PowerUpFireRatePlayer()
+    {
+        shooting.PowerUpFireRate();
     }
 }
