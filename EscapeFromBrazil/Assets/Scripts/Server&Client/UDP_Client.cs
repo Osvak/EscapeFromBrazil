@@ -106,6 +106,32 @@ public class UDP_Client : MonoBehaviour
 
     }
 
+    public void AutoEnterServer()
+    {
+        newSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+        ipep = new IPEndPoint(IPAddress.Any, 6799); // IPAddress.Any, puerto del cliente
+        newSocket.Bind(ipep);
+        server = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8000);
+        newSocket.Connect(server);
+
+        if (newSocket.Connected)
+        {
+            connected = !connected;
+            state = State.LOBBY;
+            gameManagerComp.SetState(state);
+        }
+
+        username = "ClientUser";
+
+        joinChatGO.SetActive(false);
+        joinGameGO.SetActive(true);
+
+        Serialize();
+
+        ReceiveThread = new Thread(Receiver);
+        ReceiveThread.Start();
+    }
+
     private void Receiver()
     {
         while(true)
@@ -218,4 +244,6 @@ public class UDP_Client : MonoBehaviour
         yield return new WaitForSeconds(0.16f);
         Serialize();
     }
+
+
 }
