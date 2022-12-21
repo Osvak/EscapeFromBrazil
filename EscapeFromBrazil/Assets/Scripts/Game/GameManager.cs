@@ -31,6 +31,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     public GameObject Enemy;
     public string enemyUsername;
+
+    public TMP_Text tagName;
     public Vector3 enemyPosition;
     public float enemyRot;
 
@@ -89,6 +91,8 @@ public class GameManager : MonoBehaviour
         gameSetup.SetActive(true);
         cam.transform.rotation = Quaternion.Euler(new Vector3(90, 0, 0));
         cam.transform.position = new Vector3(0, 100f, 0);
+        tagName.text = enemyUsername;
+        Debug.Log(enemyUsername);
     }
 
     void Update()

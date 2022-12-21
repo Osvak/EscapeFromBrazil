@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public TMP_Text tagName;
 
     [SerializeField]
     private GameManager gameManager;
@@ -33,10 +35,11 @@ public class PlayerMovement : MonoBehaviour
         startPos = transform.position;
         shooting = this.GetComponent<Shooting>();
     }
-    // Cread aquí lo que necesitéis para que el player se mueva
+    
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
     }
 
     void FixedUpdate()

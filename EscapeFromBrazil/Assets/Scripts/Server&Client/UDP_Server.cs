@@ -88,6 +88,7 @@ public class UDP_Server : MonoBehaviour
         score.SetActive(true);
         gameManager.SetActive(true);
         gameManagerComp.SetState(state);
+        playerMov.tagName.text = username;
         Serialize();
     }
 
