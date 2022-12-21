@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
     private TMP_Text clientScore;
 
     private int playerHp, enemyHp;
+    private int playerWins, enemyWins;
     private int startingHp = 4;
     private bool updateScore;
     public Slider playerSlider;
@@ -53,6 +54,7 @@ public class GameManager : MonoBehaviour
     public Vector3 PU_pos = Vector3.zero;
     public int PU_type = 0;
     public int PU_activeID = 0,PU_deleteID = 0;
+
 
 
     private GameObject trash;
@@ -69,15 +71,17 @@ public class GameManager : MonoBehaviour
 
         Player.PlayerReset();
 
+        playerWins = enemyWins =0;
+
         if (side == Side.SERVER)
         {
-            serverScore.text = playerHp.ToString();
-            clientScore.text = enemyHp.ToString();
+            serverScore.text = "0";
+            clientScore.text = "0";
         }
         else
         {
-            serverScore.text = enemyHp.ToString();
-            clientScore.text = playerHp.ToString();
+            serverScore.text = "0";
+            clientScore.text = "0";
         }
     }
     void Start()
@@ -96,18 +100,39 @@ public class GameManager : MonoBehaviour
         {
             if(playerHp <= 0 || enemyHp <= 0)
             {
+                if (side == Side.SERVER)
+                {
+                    if (playerHp <= 0)
+                    {
+                        enemyWins++;
+                    }
+                    else
+                    {
+                        playerWins++;
+                    }
+
+                    serverScore.text = playerWins.ToString();
+                    clientScore.text = enemyWins.ToString();
+                }
+                else
+                {
+                    if (playerHp <= 0)
+                    {
+                        enemyWins++;
+                    }
+                    else
+                    {
+                        playerWins++;
+                    }
+
+                    serverScore.text = enemyWins.ToString();
+                    clientScore.text = playerWins.ToString();
+                }
+
                 ResetGame();
+
             }
-            if (side == Side.SERVER)
-            {
-                serverScore.text = playerHp.ToString();
-                clientScore.text = enemyHp.ToString();
-            }
-            else
-            {
-                serverScore.text = enemyHp.ToString();
-                clientScore.text = playerHp.ToString();
-            }
+            
             UpdateSlider();
             updateScore = false;
         }
