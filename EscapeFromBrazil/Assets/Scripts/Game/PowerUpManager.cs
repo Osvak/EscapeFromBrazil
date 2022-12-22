@@ -16,9 +16,10 @@ public class PowerUpManager : MonoBehaviour
         Live1,
         FiringRate
     }
+    private bool firstTime = false;
 
     private int powerUpID = 0;
-
+    
     public GameObject PowerUpPrefab;
 
     //new PowerUp
@@ -77,8 +78,9 @@ public class PowerUpManager : MonoBehaviour
             poweUps[deleteId].SetActive(false);
         }
 
-        if (gameManager.GetState() == State.GAME)
+        if (!firstTime && gameManager.GetState() == State.GAME && gameManager.side == Side.SERVER)
         {
+            firstTime = true;
             StartCoroutine(CooldownSpawner());
         }
     }
