@@ -16,7 +16,7 @@ public class PowerUpManager : MonoBehaviour
         Live1,
         FiringRate
     }
-    private bool firstTime = false;
+    private bool CanSpawn = true;
 
     private int powerUpID = 0;
     
@@ -78,19 +78,21 @@ public class PowerUpManager : MonoBehaviour
             poweUps[deleteId].SetActive(false);
         }
 
-        if (!firstTime && gameManager.GetState() == State.GAME && gameManager.side == Side.SERVER)
+        if (CanSpawn && gameManager.GetState() == State.GAME && gameManager.side == Side.SERVER)
         {
-            firstTime = true;
             StartCoroutine(CooldownSpawner());
+            CanSpawn = false;
         }
     }
 
     IEnumerator CooldownSpawner(){
 
 
-        yield return new WaitForSeconds(Random.Range(5,11));
-
+        //yield return new WaitForSeconds(Random.Range(5,11));
+        yield return new WaitForSeconds(1);
         SpawnPowerUp();
+        CanSpawn = true;
+
     }
 
     private void SpawnPowerUp()
