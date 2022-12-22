@@ -46,7 +46,6 @@ public class UDP_Server : MonoBehaviour
         gameManagerComp.side = Side.SERVER;
         ShootManager = player.GetComponent<Shooting>();
         playerMov = player.GetComponent<PlayerMovement>();
-
     }
 
     private void Start()
@@ -61,6 +60,9 @@ public class UDP_Server : MonoBehaviour
         {
             StartCoroutine(SendInfo());
         }
+
+        if (state == State.GAME) StartCoroutine(SendInfo());
+
         if(updateText) 
         {
             versusText.text = username + " vs " + enemyUsername;

@@ -61,7 +61,6 @@ public class UDP_Client : MonoBehaviour
 
     void Update()
     {
-
         if (connected) StartCoroutine(SendInfo());
         if(state == State.GAME && firstTime)
         {
@@ -104,7 +103,6 @@ public class UDP_Client : MonoBehaviour
 
         ReceiveThread = new Thread(Receiver);
         ReceiveThread.Start();
-
     }
 
     public void AutoEnterServer()
@@ -229,7 +227,6 @@ public class UDP_Client : MonoBehaviour
                 {
                     gameManagerComp.EnemyCatchesPowerUp(reader.ReadInt32());
                 }
-
                 break;
             default:
                 break;
