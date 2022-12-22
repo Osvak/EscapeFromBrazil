@@ -121,6 +121,7 @@ public class UDP_Client : MonoBehaviour
         }
 
         username = "ClientUser";
+        playerMov.tagName.text = username;
 
         joinChatGO.SetActive(false);
         joinGameGO.SetActive(true);
