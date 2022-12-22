@@ -28,7 +28,7 @@ public class UDP_Server : MonoBehaviour
     public GameObject backgroundGO;
     public GameObject joinGameGO;
     public GameObject joinGameButton;
-    public GameObject score;
+    public GameObject HUD;
     public GameObject gameManager;
     public TMP_Text versusText;
     private bool updateText = false;
@@ -90,7 +90,7 @@ public class UDP_Server : MonoBehaviour
         state = State.GAME;
         backgroundGO.SetActive(false);
         joinGameGO.SetActive(false);
-        score.SetActive(true);
+        HUD.SetActive(true);
         gameManager.SetActive(true);
         gameManagerComp.SetState(state);
         playerMov.tagName.text = username;

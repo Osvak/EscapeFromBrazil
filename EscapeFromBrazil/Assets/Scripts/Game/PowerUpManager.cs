@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PowerUpManager : MonoBehaviour
@@ -22,6 +23,12 @@ public class PowerUpManager : MonoBehaviour
     
     public GameObject PowerUpPrefab;
 
+    [SerializeField]
+    private TMP_Text fireRateCountText;
+    [SerializeField]
+    private float fireRateCount;
+
+
     //new PowerUp
     private bool POPPowerUp = false, deletePowerUP = false;
     private Vector3 newPos;
@@ -36,6 +43,9 @@ public class PowerUpManager : MonoBehaviour
         powerUpID = 0;
         POPPowerUp = false;
         deletePowerUP = false;
+
+        fireRateCount = 0;
+        fireRateCountText.text = fireRateCount.ToString();
     }
     private void OnDrawGizmosSelected()
     {
@@ -53,6 +63,9 @@ public class PowerUpManager : MonoBehaviour
         }
 
         poweUps.Clear();
+
+        fireRateCount = 0;
+        fireRateCountText.text = fireRateCount.ToString();
     }
 
     // Update is called once per frame
@@ -170,6 +183,8 @@ public class PowerUpManager : MonoBehaviour
 
                 Debug.Log("Player got increased rate of fire");
                 gameManager.Player.PowerUpFireRatePlayer();
+                fireRateCount++;
+                fireRateCountText.text = fireRateCount.ToString();
                 break;
             default:
                 break;

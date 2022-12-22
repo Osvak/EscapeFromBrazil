@@ -36,7 +36,7 @@ public class UDP_Client : MonoBehaviour
     public GameObject joinChatGO;
     public GameObject backgroundGO;
     public GameObject joinGameGO;
-    public GameObject score;
+    public GameObject HUD;
     public GameObject gameManager;
     public GameObject player;
     private Shooting ShootManager;
@@ -66,7 +66,7 @@ public class UDP_Client : MonoBehaviour
         {
             joinGameGO.SetActive(false);
             backgroundGO.SetActive(false);
-            score.SetActive(true);
+            HUD.SetActive(true);
             gameManager.SetActive(true);
             gameManagerComp.SetState(state);
             firstTime = !firstTime;
