@@ -107795,6 +107795,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8991193268371216125, guid: 59e572da967b5e8449020f9fc994aea9, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8991193268371216125, guid: 59e572da967b5e8449020f9fc994aea9, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8991193268371216125, guid: 59e572da967b5e8449020f9fc994aea9, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8991193268371216125, guid: 59e572da967b5e8449020f9fc994aea9, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8991193268371237159, guid: 59e572da967b5e8449020f9fc994aea9, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -112901,6 +112917,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3189735974183840420, guid: 9e8cb1af1321e8344ab480e88528e711, type: 3}
       propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7118879101774211166, guid: 9e8cb1af1321e8344ab480e88528e711, type: 3}
+      propertyPath: m_Color.a
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7118879101774256004, guid: 9e8cb1af1321e8344ab480e88528e711, type: 3}

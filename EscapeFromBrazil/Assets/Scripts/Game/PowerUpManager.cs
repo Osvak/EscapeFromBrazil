@@ -87,9 +87,7 @@ public class PowerUpManager : MonoBehaviour
 
     IEnumerator CooldownSpawner(){
 
-
-        //yield return new WaitForSeconds(Random.Range(5,11));
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(Random.Range(3,6));
         SpawnPowerUp();
         CanSpawn = true;
 
