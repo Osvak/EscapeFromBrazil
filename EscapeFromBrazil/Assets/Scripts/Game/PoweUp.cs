@@ -23,11 +23,6 @@ public class PoweUp : MonoBehaviour
 
     }
 
-    public void SetType(int _type)
-    {
-        type = _type;
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && !delete)
