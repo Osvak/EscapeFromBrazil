@@ -58,12 +58,6 @@ public class PowerUpManager : MonoBehaviour
     void Update()
     {
 
-        if (gameManager.GetState() == State.GAME && gameManager.side == Side.SERVER)
-        {
-            if(Input.GetKeyDown(KeyCode.Q)) SpawnPowerUp();
-        }
-
-
         if (POPPowerUp)
         {
             POPPowerUp = false;
@@ -83,10 +77,23 @@ public class PowerUpManager : MonoBehaviour
             poweUps[deleteId].SetActive(false);
         }
 
+        if (gameManager.GetState() == State.GAME)
+        {
+            StartCoroutine(CooldownSpawner());
+        }
+    }
+
+    IEnumerator CooldownSpawner(){
+
+
+        yield return new WaitForSeconds(Random.Range(5,11));
+
+        SpawnPowerUp();
     }
 
     private void SpawnPowerUp()
     {
+        
         float randomPosX = Random.Range((center.x - (size.x * 0.5f)), (center.x + (size.x * 0.5f)));
         float randomPosZ = Random.Range((center.z - (size.y * 0.5f)), (center.z + (size.y * 0.5f)));
 

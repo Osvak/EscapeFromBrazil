@@ -57,7 +57,10 @@ public class UDP_Server : MonoBehaviour
     void Update()
     {
 
-        if (state == State.GAME) StartCoroutine(SendInfo());
+        if (state == State.GAME)
+        {
+            StartCoroutine(SendInfo());
+        }
         if(updateText) 
         {
             versusText.text = username + " vs " + enemyUsername;
