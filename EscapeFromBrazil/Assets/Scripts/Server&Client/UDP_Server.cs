@@ -30,6 +30,7 @@ public class UDP_Server : MonoBehaviour
     public GameObject joinGameButton;
     public GameObject HUD;
     public GameObject gameManager;
+    public GameObject inGameMusic;
     public TMP_Text versusText;
     private bool updateText = false;
 
@@ -92,6 +93,7 @@ public class UDP_Server : MonoBehaviour
         joinGameGO.SetActive(false);
         HUD.SetActive(true);
         gameManager.SetActive(true);
+        inGameMusic.SetActive(true);
         gameManagerComp.SetState(state);
         playerMov.tagName.text = username;
         Serialize();

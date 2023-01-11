@@ -38,6 +38,7 @@ public class UDP_Client : MonoBehaviour
     public GameObject joinGameGO;
     public GameObject HUD;
     public GameObject gameManager;
+    public GameObject inGameMusic;
     public GameObject player;
     private Shooting ShootManager;
 
@@ -68,6 +69,7 @@ public class UDP_Client : MonoBehaviour
             backgroundGO.SetActive(false);
             HUD.SetActive(true);
             gameManager.SetActive(true);
+            inGameMusic.SetActive(true);
             gameManagerComp.SetState(state);
             firstTime = !firstTime;
         }
