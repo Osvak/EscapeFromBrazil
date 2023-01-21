@@ -33,6 +33,7 @@ public class UDP_Server : MonoBehaviour
     public GameObject gameManager;
     public GameObject inGameMusic;
     public TMP_Text versusText;
+    public TMP_Text IPText;
     private bool updateText = false;
 
     public GameObject player;
@@ -85,6 +86,8 @@ public class UDP_Server : MonoBehaviour
         versusText.text = "Waiting for an oponent...";
         state = State.LOBBY;
         gameManagerComp.SetState(state);
+
+        IPText.text = GetLocalIPAddress();
     }
 
     public void EnterGame()
@@ -231,5 +234,19 @@ public class UDP_Server : MonoBehaviour
     {
         yield return new WaitForSeconds(0.16f);
         Serialize();
+    }
+
+    public static string GetLocalIPAddress()
+    {
+        var host = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName());
+        foreach (var ip in host.AddressList)
+        {
+            if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+            {
+                return ip.ToString();
+            }
+        }
+
+        throw new System.Exception("No network adapters with an IPv4 address in the system!");
     }
 }

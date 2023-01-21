@@ -10,6 +10,6 @@ public class InitPanel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        JoinChat.SetActive(true);       
+        JoinChat.SetActive(true);
     }
 }
