@@ -7,6 +7,7 @@ using TMPro;
 using UnityEngine;
 using System.Threading;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 public class UDP_Server : MonoBehaviour
 { 
@@ -218,6 +219,12 @@ public class UDP_Server : MonoBehaviour
         }
 
         deserializeStream.Dispose();
+    }
+
+    public void ExitGame()
+    {
+        newSocket.Close();
+        SceneManager.LoadScene("Selector");
     }
 
     IEnumerator SendInfo()

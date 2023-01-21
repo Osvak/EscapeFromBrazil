@@ -31,24 +31,31 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     public GameObject Enemy;
     public string enemyUsername;
-
     public TMP_Text tagName;
     public Vector3 enemyPosition;
     public float enemyRot;
-
     
     [Header("UI")]
     [SerializeField]
     private TMP_Text serverScore;
     [SerializeField]
     private TMP_Text clientScore;
+    public GameObject background;
+    public GameObject winText;
+    public GameObject loseText;
+    public GameObject exitButton;
 
     private int playerHp, enemyHp;
     private int playerWins, enemyWins;
     private int startingHp = 4;
+    private int winningRounds = 3;
     private bool updateScore;
     public Slider playerSlider;
     public Slider enemySlider;
+
+    // Camera Rotation Backup
+    Quaternion camRotBackUp;
+    Vector3 camPosBackUp;
 
     [Header("PowerUp")]
     [SerializeField] private PowerUpManager powerUpManager;
@@ -56,8 +63,6 @@ public class GameManager : MonoBehaviour
     public Vector3 PU_pos = Vector3.zero;
     public int PU_type = 0;
     public int PU_activeID = 0,PU_deleteID = 0;
-
-
 
     private GameObject trash;
 
@@ -73,7 +78,7 @@ public class GameManager : MonoBehaviour
 
         Player.PlayerReset();
 
-        playerWins = enemyWins =0;
+        playerWins = enemyWins = 0;
 
         if (side == Side.SERVER)
         {
@@ -89,8 +94,13 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         gameSetup.SetActive(true);
+
+        camRotBackUp = cam.transform.rotation;
+        camPosBackUp = cam.transform.position;
+
         cam.transform.rotation = Quaternion.Euler(new Vector3(90, 0, 0));
         cam.transform.position = new Vector3(0, 100f, 0);
+
         tagName.text = enemyUsername;
         Debug.Log(enemyUsername);
     }
@@ -133,13 +143,40 @@ public class GameManager : MonoBehaviour
                     clientScore.text = playerWins.ToString();
                 }
 
-                ResetGame();
+                if(playerWins == winningRounds || enemyWins == winningRounds)
+                {
+                    ShowResults();
 
+                }
+                else
+                {
+                    ResetGame();
+                }
             }
             
             UpdateSlider();
             updateScore = false;
         }
+    }
+
+    private void ShowResults()
+    {
+        cam.transform.rotation = camRotBackUp;
+        cam.transform.position = new Vector3(0, 1, -10);
+
+        gameSetup.SetActive(false);
+        background.SetActive(true);
+
+        if(playerWins == 3)
+        {
+            winText.SetActive(true);
+        }
+        else
+        {
+            loseText.SetActive(true);
+        }
+
+        exitButton.SetActive(true);
     }
 
     public void SetState(State newState)

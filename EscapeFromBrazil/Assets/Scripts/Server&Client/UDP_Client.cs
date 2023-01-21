@@ -8,6 +8,7 @@ using TMPro;
 using UnityEngine;
 using System.Threading;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 public class UDP_Client : MonoBehaviour
 {
@@ -211,13 +212,14 @@ public class UDP_Client : MonoBehaviour
         deserializeStream.Dispose();
     }
 
-
+    public void ExitGame()
+    {
+        SceneManager.LoadScene("Selector");
+    }
 
     IEnumerator SendInfo()
     {
         yield return new WaitForSeconds(0.16f);
         Serialize();
     }
-
-
 }
