@@ -22,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField]
     private GameObject gunPivot;
+    [SerializeField]
+    private GameObject model;
 
     public bool hit = false;
     private State state;
@@ -73,9 +75,11 @@ public class PlayerMovement : MonoBehaviour
         if (Physics.Raycast(ray, out hit, 1000f))
         {
             gunPivot.transform.LookAt(hit.point, upAxis);
+            model.transform.LookAt(hit.point, upAxis);
         }
         //zero out all rotations except the axis I want
         gunPivot.transform.rotation = Quaternion.Euler(0, gunPivot.transform.eulerAngles.y, 0);
+        model.transform.rotation = Quaternion.Euler(0, model.transform.eulerAngles.y, 0);
     }
 
     private void Move()

@@ -109,6 +109,7 @@ public class GameManager : MonoBehaviour
     {
         Enemy.transform.position = enemyPosition;
         Enemy.transform.GetChild(0).localRotation = Quaternion.Euler(new Vector3(0, enemyRot, 0));
+        Enemy.transform.GetChild(2).localRotation = Quaternion.Euler(new Vector3(0, enemyRot, 0));
 
         if (updateScore)
         {
@@ -166,6 +167,8 @@ public class GameManager : MonoBehaviour
 
         gameSetup.SetActive(false);
         background.SetActive(true);
+
+        BGAudio.Instance.gameObject.GetComponent<AudioSource>().Play();
 
         if(playerWins == 3)
         {

@@ -7,6 +7,9 @@ public class DestroyMusic : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        BGAudio.Instance.gameObject.GetComponent<AudioSource>().Pause();
+        if (BGAudio.Instance != null)
+        {
+            BGAudio.Instance.gameObject.GetComponent<AudioSource>().Stop();
+        }
     }
 }
