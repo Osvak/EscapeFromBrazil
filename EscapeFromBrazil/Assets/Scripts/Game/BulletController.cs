@@ -15,4 +15,12 @@ public class BulletController : MonoBehaviour
         Destroy(gameObject);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("trigger");
+        if (other.transform.CompareTag("House"))
+        {
+            Destroy(gameObject);
+        }
+    }
 }
