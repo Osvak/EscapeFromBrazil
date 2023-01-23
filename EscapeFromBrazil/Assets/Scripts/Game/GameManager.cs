@@ -146,6 +146,7 @@ public class GameManager : MonoBehaviour
 
                 if(playerWins == winningRounds || enemyWins == winningRounds)
                 {
+                    Debug.Log("Results");
                     ShowResults();
 
                 }
@@ -168,8 +169,6 @@ public class GameManager : MonoBehaviour
         gameSetup.SetActive(false);
         background.SetActive(true);
 
-        BGAudio.Instance.gameObject.GetComponent<AudioSource>().Play();
-
         if(playerWins == 3)
         {
             winText.SetActive(true);
@@ -180,6 +179,8 @@ public class GameManager : MonoBehaviour
         }
 
         exitButton.SetActive(true);
+
+        BGAudio.Instance.gameObject.GetComponent<AudioSource>().Play();
     }
 
     public void SetState(State newState)
